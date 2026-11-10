@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    private float leftBound = -15;
     private PlayerController playerControllerScript;
     public float speed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,10 +17,10 @@ public class Obstacle : MonoBehaviour
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
-        else
+    if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle"))
         {
-            speed = 0;
+            Destroy(gameObject);
         }
-   
+
     }
 }
