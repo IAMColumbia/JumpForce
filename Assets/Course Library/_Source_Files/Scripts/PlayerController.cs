@@ -14,9 +14,11 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip crashSound;
     public ParticleSystem dirtParticle;
+    private AudioSource playerAudio;
 
     void Start()
     {
+        playerAudio = GetComponent<AudioSource>();
         playerRb = GetComponent<Rigidbody>();
         jumpAction.Enable();
         Physics.gravity *= gravityModifier;
