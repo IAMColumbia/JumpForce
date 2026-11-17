@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip crashSound;
     public ParticleSystem dirtParticle;
+
     private AudioSource playerAudio;
 
     void Start()
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (jumpAction.triggered && isOnGround && !gameOver)
         {
             dirtParticle.Stop();
+            playerAudio.PlayOneShot(jumpSound, 1);
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
-           
+           playerAudio.PlayOneShot(crashSound, 1);
             Debug.Log("Game Over!");
             gameOver = true;
             playerAnim.SetBool("Death_b", true);
