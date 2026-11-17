@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool gameOver = false;
     private Animator playerAnim;
     public ParticleSystem explosionParticle;
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
     public ParticleSystem dirtParticle;
 
     void Start()
@@ -25,10 +27,11 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpAction.triggered && isOnGround && !gameOver)
         {
+            dirtParticle.Stop();
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig");
-            dirtParticle.Stop();
+            
         }
     }
 
@@ -39,6 +42,7 @@ public class PlayerController : MonoBehaviour
             isOnGround = true;
             dirtParticle.Play();
         }
+
         else if (collision.gameObject.CompareTag("Obstacle"))
         {
            
